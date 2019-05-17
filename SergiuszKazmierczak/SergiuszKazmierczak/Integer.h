@@ -17,5 +17,15 @@ public:
 		int temp = atoi(value.c_str());
 		data.push_back(temp);
 	}
+
+	int getDataVectorSize()
+	{
+		return data.size();
+	}
+
+	string getDataVal(int i)
+	{
+		return to_string(data[i]);
+	}
 };
 

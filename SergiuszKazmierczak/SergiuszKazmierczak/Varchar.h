@@ -25,6 +25,16 @@ public:
 		return;
 	}
 
+	int getDataVectorSize()
+	{
+		return data.size();
+	}
+
+	string getDataVal(int i)
+	{
+		return data[i];
+	}
+
 private:
 	int size;
 };

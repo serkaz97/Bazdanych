@@ -31,6 +31,7 @@ public:
 			else if(KeyWord == "INSERT")
 			{
 				cout << "Insert Row to  Table" << endl;
+				INSERT(QuarryList[i]);
 			}
 			else if (KeyWord=="SELECT")
 			{
@@ -76,9 +77,18 @@ public:
 	{
 		
 	}
-	void INSERT()
+	void INSERT(QuarryStruct x)
 	{
-		
+		for(int i=0; i<tables.size(); i++)
+		{
+			if(tables[i].name== x.names[0])
+			{
+				for(int j=0; j<tables[i].columns.size(); j++)
+				{
+					tables[i].columns[j].addElement(x.QuarryParam[i]);
+				}
+			}
+		}
 	}
 
 

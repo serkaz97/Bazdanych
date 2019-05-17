@@ -14,7 +14,7 @@ class Table
 {
 public:
 	string name;
-	deque<Column> columns;
+	vector<Column> columns;
 	Table() {}
 	Table(string name, vector<string> columnTypes, vector<int> sizes, vector<string> columnNames)
 	{
@@ -53,9 +53,16 @@ public:
 
 	void printTable()
 	{
+		for (int i = 0; i < columns.size(); i++)
+			cout << columns[i].name << ", ";
+		cout << endl;
+
 		for(int i=0; i<columns.size(); i++)
 		{
-			cout <<	columns[i].name << "\t";
+			for(int j=0; j<columns[0].getDataVectorSize(); j++)
+			{
+				columns[i].getDataVal(j);
+			}
 		}
 		
 		cout << endl;

@@ -25,5 +25,14 @@ public:
 	{
 		
 	}
+	virtual int getDataVectorSize()
+	{
+		return 0;
+	}
+
+	virtual string getDataVal(int i)
+	{
+		return string();
+	}
 };
 

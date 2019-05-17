@@ -17,5 +17,16 @@ public:
 		if(value == "false" || value == "true")
 			data.push_back(value);
 	}
+
+
+	int getDataVectorSize()
+	{
+		return data.size();
+	}
+
+	string getDataVal(int i)
+	{
+		return data[i];
+	}
 };
 
