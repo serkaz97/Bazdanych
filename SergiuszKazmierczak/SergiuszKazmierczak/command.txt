@@ -1,0 +1,4 @@
+CREATE BookInventory ( Title : Varchar(100), Author : Varchar(60), NumberOfCopies : Integer, Price : Float );
+INSERT INTO BookInventory ("Autostopem przez galaktyke", "Douglas Adams", 3, 42.00); 
+INSERT INTO BookInventory ("Diuna", "Frank Herbert", 5, 55.00); 
+INSERT INTO BookInventory ("TO", "Stephen King", 2, 39.99);
