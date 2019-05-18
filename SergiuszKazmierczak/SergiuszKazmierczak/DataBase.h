@@ -85,7 +85,7 @@ public:
 			{
 				for(int j=0; j<tables[i].columns.size(); j++)
 				{
-					tables[i].columns[j].addElement(x.QuarryParam[i]);
+					tables[i].columns[j].addElement(x.QuarryParam[j]);
 				}
 			}
 		}

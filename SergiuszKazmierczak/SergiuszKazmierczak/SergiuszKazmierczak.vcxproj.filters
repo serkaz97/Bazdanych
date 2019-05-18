@@ -24,25 +24,10 @@
     <ClInclude Include="Column.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Integer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Float.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Boolean.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Varchar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SQLparser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Quarry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,18 +41,6 @@
     <ClCompile Include="Column.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Integer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Float.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Boolean.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Varchar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,9 +48,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DataBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Quarry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -143,11 +143,12 @@ private:
 			//Checking if prameter has only one word
 			if (temp[0] == '\"' && temp[temp.length() - 1] == '\"')
 			{
-				temp[0] = 0;
+				temp.erase(temp.begin());
 				temp[temp.length() - 1] = 0;
 				cout << "temp" << endl;
 				QuarryParam.push_back(temp);
 				rawcommand.erase(rawcommand.begin() + i);
+				temp = rawcommand[i];
 			}
 			//Searching for a string with " on last index
 			if (temp[0] == '\"' && temp[temp.length() - 1] != '\"')

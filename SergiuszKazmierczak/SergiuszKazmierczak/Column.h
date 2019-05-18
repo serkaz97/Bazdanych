@@ -10,29 +10,27 @@ using namespace  std;
 class Column
 {
 public:
-	Column()
+	Column(string name)
 	{
-		cout << "Column Constructor" << endl;
-	};
-	~Column(){};
-	string name;
-	types type;
-	virtual void addElement(string)
-	{
-		
-	}
-	virtual void addElement(string, string)
-	{
-		
-	}
-	virtual int getDataVectorSize()
-	{
-		return 0;
+		this->name = name;
 	}
 
-	virtual string getDataVal(int i)
+	Column(string name, int size)
 	{
-		return string();
+		this->name = name;
+		this->size = size;
+
 	}
+	void addElement(string el)
+	{
+		data.push_back(el);
+	}
+	int getDataVectorSize() { return 0; }
+	string getDataVal(int i) { return data[i]; }
+
+	string name;
+	types type;
+	int size;
+	vector<string> data;
 };
 
