@@ -157,7 +157,6 @@
     <ClInclude Include="Float.h" />
     <ClInclude Include="Integer.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Quarry.h" />
     <ClInclude Include="SQLparser.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="Varchar.h" />
@@ -175,7 +174,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Quarry.cpp" />
     <ClCompile Include="SQLparser.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="Varchar.cpp" />

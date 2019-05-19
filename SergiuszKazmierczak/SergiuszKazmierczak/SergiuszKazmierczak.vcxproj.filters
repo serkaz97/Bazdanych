@@ -42,9 +42,6 @@
     <ClInclude Include="DataBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Quarry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -75,9 +72,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DataBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Quarry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -14,10 +14,11 @@ class Table
 {
 public:
 	string name;
-	vector<Column> columns;
+	vector<Column*> columns;
 	Table() {}
 	Table(string name, vector<string> columnTypes, vector<int> sizes, vector<string> columnNames)
 	{
+		Column *x;
 		this->name = name;
 		if (columnTypes.size() == columnNames.size())
 		{
@@ -26,24 +27,24 @@ public:
 			{
 				if (columnTypes[i] == "Varchar")
 				{
-					Varchar v(columnNames[i], sizes[0]);
+					x = new Varchar(columnNames[i], sizes[0]);
 					sizes.erase(sizes.begin());
-					columns.push_back(v);
+					columns.push_back(x);
 				}
 				if(columnTypes[i] == "Integer")
 				{
-					Integer I(columnNames[i]);
-					columns.push_back(I);
+					x = new Integer(columnNames[i]);
+					columns.push_back(x);
 				}
 				if(columnTypes[i] == "Boolean")
 				{
-					Boolean B(columnNames[i]);
-					columns.push_back(B);
+					x=new Boolean(columnNames[i]);
+					columns.push_back(x);
 				}
 				if(columnTypes[i]=="Float")
 				{
-					Float F(columnNames[i]);
-					columns.push_back(F);
+					x= new Float(columnNames[i]);
+					columns.push_back(x);
 				}
 			}
 		}
@@ -54,15 +55,16 @@ public:
 	void printTable()
 	{
 		for (int i = 0; i < columns.size(); i++)
-			cout << columns[i].name << ", ";
+			cout << columns[i]->name << ", ";
 		cout << endl;
 
-		for(int i=0; i<columns.size(); i++)
+		for(int i=0; i<columns[0]->getColumnSize(); i++)
 		{
-			for(int j=0; j<columns[0].getDataVectorSize(); j++)
+			for(int j=0; j<columns.size(); j++)
 			{
-				columns[i].getDataVal(j);
+				cout << columns[j]->getDataVal(i)<<", ";
 			}
+			cout << endl;
 		}
 		
 		cout << endl;

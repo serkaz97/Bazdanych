@@ -15,14 +15,16 @@ public:
 	vector<string> data;
 	void addElement(string value)
 	{
-		if (value.length() > 255)
+		if (value.length() > size)
 		{
-			//Throw Error: VarChar is to long
+			//What to do?
 			return;
 
-		}		
-		data.push_back(value);
-		return;
+		}
+		else {
+			data.push_back(value);
+			return;
+		}
 	}
 
 	int getDataVectorSize()
@@ -32,7 +34,22 @@ public:
 
 	string getDataVal(int i)
 	{
-		return data[i];
+		string temp = data[i];
+		if(temp[0]==' ')
+		{
+			temp.erase(temp.begin());
+		}
+		return temp;
+	}
+
+	int getColumnSize()
+	{
+		return data.size();
+	}
+
+	void clearData()
+	{
+		data.erase(data.begin(), data.end());
 	}
 
 private:

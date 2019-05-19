@@ -11,9 +11,6 @@
 
 int main()
 {
-
 	DataBase DataBase;
-	DataBase.ProcesQuerry("command.txt");
-
 }
 

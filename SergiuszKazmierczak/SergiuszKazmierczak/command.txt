@@ -1,4 +1,2 @@
-CREATE BookInventory ( Title : Varchar(100), Author : Varchar(60), NumberOfCopies : Integer, Price : Float );
-INSERT INTO BookInventory ("Autostopem przez galaktyke", "Douglas Adams", 3, 42.00); 
-INSERT INTO BookInventory ("Diuna", "Frank Herbert", 5, 55.00); 
-INSERT INTO BookInventory ("TO", "Stephen King", 2, 39.99);
+DROP BookInventory; CREATE BookInventory ( ID : Integer UNIQUE, Title : Varchar(100), Author : Varchar(60), NumberOfCopies : Integer, Price : Float );
+INSERT INTO BookInventory (1, "Autostopem przez galaktyke", "Douglas Adams", 3, 42.00); INSERT INTO BookInventory (2, "Diuna", "Frank Herbert", 5, 55.00); INSERT INTO BookInventory (2, "TO", "Stephen King", 2, 39.99); INSERT INTO BookInventory (1, "13 Pieter", "Filip Springer", 2, 39.99); SELECT * FROM BookInventory;

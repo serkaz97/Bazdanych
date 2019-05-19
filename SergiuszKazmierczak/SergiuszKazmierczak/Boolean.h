@@ -28,5 +28,15 @@ public:
 	{
 		return data[i];
 	}
+
+	int getColumnSize()
+	{
+		return data.size();
+	}
+
+	void clearData()
+	{
+		data.erase(data.begin(), data.end());
+	}
 };
 

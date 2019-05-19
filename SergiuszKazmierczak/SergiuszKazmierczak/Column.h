@@ -12,7 +12,6 @@ class Column
 public:
 	Column()
 	{
-		cout << "Column Constructor" << endl;
 	};
 	~Column(){};
 	string name;
@@ -33,6 +32,16 @@ public:
 	virtual string getDataVal(int i)
 	{
 		return string();
+	}
+
+	virtual  int getColumnSize()
+	{
+		return 0;
+	}
+
+	virtual void clearData()
+	{
+		return;
 	}
 };
 

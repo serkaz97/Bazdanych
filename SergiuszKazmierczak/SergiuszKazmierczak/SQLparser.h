@@ -13,6 +13,7 @@ struct QuarryStruct
 	vector<string> ColumnTypes;
 	vector<int> VarCharSizes;
 	vector<string> names;
+	vector<string> conditions;
 };
 
 
@@ -38,6 +39,105 @@ public:
 	}
 
 
+	void eliminatecommas(vector<string> &names)
+	{
+		vector<string> newNames;
+		string temp2;
+		bool found = false;
+		for (int i = 0; i < names.size(); i++)
+		{
+			found = false;
+			string temp = names[i];
+			for (int j = 0; j < temp.size(); j++)
+			{
+				if (temp[j] == ',')
+				{
+					temp2 = temp.substr(0, j);
+					newNames.push_back(temp2);
+					temp.erase(temp.begin(), temp.begin() + j + 1);
+					names[i].erase(names[i].begin(), names[i].begin() + j + 1);
+					i = -1;
+					found = true;
+					break;
+				}
+
+			}
+			if (found == false)
+			{
+				newNames.push_back(temp);
+			}
+		}
+
+		names = newNames;
+	}
+
+	void cleanSpecialChars(vector<string> &rawcommand, string specialchars)
+	{
+
+		for (int i = 0; i < rawcommand.size(); i++)
+		{
+			string temp = rawcommand[i];
+			for (int j = 0; j < temp.length(); j++)
+			{
+				for (int k = 0; k < specialchars.length(); k++)
+				{
+					if (temp[j] == specialchars[k])
+					{
+						temp.erase(j, 1);
+						j--;
+						break;
+					}
+				}
+			}
+			if (temp.size() > 0)
+				if (temp[temp.size() - 1] == ' ' || temp[temp.size() - 1] == '\0')
+				{
+					temp.erase(temp.end() - 1);
+				}
+			rawcommand[i] = temp;
+		}
+		for (int i = 0; i < rawcommand.size(); i++)
+		{
+			if (rawcommand[i].size() == 0)
+				rawcommand.erase(rawcommand.begin() + i);
+		}
+	}
+
+	bool isInt(string temp)
+	{
+		bool digital = false;
+		for (int i = 0; i < temp.length(); i++)
+		{
+			if (int(temp[i]) >= 48 && int(temp[i]) <= 57)
+			{
+				digital = true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool isFloat(string temp)
+	{
+		bool digital = false;
+		for (int i = 0; i < temp.length(); i++)
+		{
+			if (int(temp[i]) >= 48 && int(temp[i]) <= 57 || int(temp[i]) == 46)
+			{
+				digital = true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return true;
+
+	}
+
 
 
 private:
@@ -50,11 +150,18 @@ private:
 
 	void getrawcommand(const char * filename)
 	{
-		ifstream inf(filename);
+		ifstream file(filename);
 		string word;
-		while (inf >> word)
+		if (file)
 		{
-			rawcommand.push_back(word);
+			while (file >> word)
+			{
+				rawcommand.push_back(word);
+			}
+		}
+		else
+		{
+			cout << "file doesnt exist" << endl;
 		}
 	}
 
@@ -78,34 +185,9 @@ private:
 	}
 
 
-	void cleanSpecialChars(vector<string> &rawcommand)
-	{
-		string specialChars = "(),\\;:";
-		for (int i = 0; i < rawcommand.size(); i++)
-		{
-			string temp = rawcommand[i];
-			for (int j = 0; j < temp.length(); j++)
-			{
-				for (int k = 0; k < specialChars.length(); k++)
-				{
-					if (temp[j] == specialChars[k])
-					{
-						temp.erase(j, 1);
-						j--;
-						break;
-					}
-				}
-			}
-			rawcommand[i] = temp;
-		}
-		for(int i=0; i<rawcommand.size(); i++)
-		{
-			if (rawcommand[i].size() == 0)
-				rawcommand.erase(rawcommand.begin() + i);
-		}
-	}
 
-	vector<string> findKeyWords(vector<string> &rawcommand)
+
+	void findKeyWords(vector<string> &rawcommand, QuarryStruct &q)
 	{
 		vector<string> keywords;
 		for (int i = 0; i < rawcommand.size(); i++)
@@ -130,8 +212,11 @@ private:
 				i--;
 			}
 		}
-		return keywords;
+		q.KeyWords = keywords;
+
 	}
+
+
 	
 	void findStrings(vector<string> &QuarryParam, vector<string> &names, vector<string>& rawcommand)
 	{
@@ -143,11 +228,12 @@ private:
 			//Checking if prameter has only one word
 			if (temp[0] == '\"' && temp[temp.length() - 1] == '\"')
 			{
-				temp[0] = 0;
+				temp.erase(temp.begin());
 				temp[temp.length() - 1] = 0;
 				cout << "temp" << endl;
 				QuarryParam.push_back(temp);
 				rawcommand.erase(rawcommand.begin() + i);
+				temp = rawcommand[i];
 			}
 			//Searching for a string with " on last index
 			if (temp[0] == '\"' && temp[temp.length() - 1] != '\"')
@@ -181,40 +267,6 @@ private:
 		}
 	}
 	
-	bool isInt(string temp)
-	{
-		bool digital = false;
-		for(int i=0; i< temp.length(); i++)
-		{
-			if(int(temp[i])>=48 && int(temp[i]) <=57)
-			{
-				digital = true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	bool isFloat(string temp)
-	{
-		bool digital = false;
-		for (int i = 0; i < temp.length(); i++)
-		{
-			if (int(temp[i]) >= 48 && int(temp[i]) <= 57 || int(temp[i])==46)
-			{
-				digital = true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		return true;
-
-	}
 
 
 	void findTypes(vector<string> &types, vector<int> &varcharsizes, vector<string> &rawcommand)
@@ -249,7 +301,6 @@ private:
 			std::size_t found = temp.find("Varchar");
 			if(found!=temp.npos)
 			{	
-				//TO DO: Zrobiæ finda w stringu
 				types.push_back("Varchar");
 				while(temp[0] !='(')
 				{
@@ -276,32 +327,7 @@ private:
 
 	void printQuarry()
 	{
-		/*for( int i = 0; i<quary.KeyWords.size(); i++)
-		{
-			cout << quary.KeyWords[i] << "  ";
-		}
-		cout << endl;
-		for (int i = 0; i < quary.Names.size(); i++)
-		{
-			cout << quary.ColumnNames[i] << "  ";
-		}
-		cout << endl;
-		for (int i = 0; i < quary.VarCharSizes.size(); i++)
-		{
-			cout << quary.VarCharSizes[i] << "  ";
-		}
-		cout << endl;
-		for (int i = 0; i < quary.ColumnTypes.size(); i++)
-		{
-			cout << quary.ColumnTypes[i] << "  ";
-		}
-		cout << endl;
-		for (int i = 0; i < quary.QuarryParam.size(); i++)
-		{
-			cout << quary.QuarryParam[i] << "  ";
-		}
-		cout << endl;
-		//cout << quary.destination << endl;*/
+
 	}
 
 	bool hascomma(string s)
@@ -321,12 +347,48 @@ private:
 		{
 			vector<string>rawquarry = Rawquarylist[i];
 			QuarryStruct tempQ;
-			tempQ.KeyWords = findKeyWords(rawquarry);
+			findKeyWords(rawquarry, tempQ);
 			findTypes(tempQ.ColumnTypes, tempQ.VarCharSizes, rawquarry);
-			cleanSpecialChars(rawquarry);
+			if (tempQ.KeyWords[0] != "SELECT")
+			{
+				cleanSpecialChars(rawquarry, specialChars);
+			}
 			findStrings(tempQ.QuarryParam, tempQ.names, rawquarry);
+			if (tempQ.KeyWords[0] == "SELECT")
+				eliminatecommas(tempQ.names);
+			string x = "\"";
+			cleanSpecialChars(tempQ.QuarryParam, x);
+			cleanSpecialChars(tempQ.names, ";");
 			QuarryList.push_back(tempQ);
 		}
 	}
+
+	string specialChars = "()\\,;:";
+
+	/*void FindConditions(vector<string> &rawcom, QuarryStruct &q)
+	{
+		for(int i=1; i<rawcom.size(); i++)
+		{
+			string temp = rawcom[i];
+			string condition;
+			for(int j=0; j<temp.size(); j++)
+			{
+				
+				if (temp[j] == '=' ||
+					temp[j] == '>' ||
+					temp[j] == '<' || temp[j] == '!')
+				{
+					condition.push_back(temp[j]);
+				}
+				
+			       
+
+			}
+			q.conditions.push_back(condition);
+		}
+		return;
+	}*/
+
+	
 };
 
